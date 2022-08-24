@@ -2,18 +2,29 @@ import { createRouter } from "./context";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
+export const create{{ pascalCase name create }}Schema = z.object({
+  {{ fieldsToZod fields=fields method="create" }}
+})
+
+export const update{{ pascalCase name update }}Schema = z.object({
+  {{ fieldsToZod fields=fields method="update" }}
+})
+
+export const get{{ pascalCase name get }}Schema = z.object({
+  {{ fieldsToZod fields=fields method="get" }}
+})
+
+export const delete{{ pascalCase name delete}}Schema = z.object({
+  {{ fieldsToZod fields=fields method="delete" }}
+})
+
 export const {{ lowerCase name }}Router = createRouter()
   .query("list-{{ plural (lowerCase name) }}", {
-    input: z.object({
-{{fieldsToZod fields }}
-    }),
     async resolve({ ctx, input }) {
 
     },
   }).query("get-{{ lowerCase name }}", {
-    input: z.object({
-
-    }),
+    input: get{{ pascalCase name }}Schema,
     async resolve({ ctx, input }) {
 
     },
@@ -46,9 +57,7 @@ export const {{ lowerCase name }}Router = createRouter()
       }
     },
   }).mutation("update-{{ lowerCase name }}", {
-    input: z.object({
-
-    }),
+    input: update{{ pascalCase name }}Schema,
     async resolve({ ctx, input }) {
       const {  } = input;
 
@@ -64,9 +73,7 @@ export const {{ lowerCase name }}Router = createRouter()
       }
     },
   }).mutation("delete-{{ lowerCase name }}", {
-    input: z.object({
-
-    }),
+    input: delete{{ pascalCase name }}Schema,
     async resolve({ ctx, input }) {
       const {  } = input;
 

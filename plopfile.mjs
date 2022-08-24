@@ -1,4 +1,5 @@
 import pluralize from "pluralize";
+import Handlebars from "handlebars";
 
 export default function (plop) {
   plop.setHelper("plural", function (text) {
@@ -9,15 +10,25 @@ export default function (plop) {
     return pluralize.singular(text);
   });
 
-  plop.setHelper("fieldsToZod", function (text) {
-    return text.split(" ").map((field) => {
+  plop.setHelper("fieldsToZod", function ({ hash }) {
+    const { method, fields } = hash;
+
+    console.log({ method });
+
+    const schema = fields.split(" ").map((field) => {
       const s = field.split(":");
 
       return {
         name: s[0],
-        value: s[1],
+        type: s[1],
       };
     });
+
+    return new Handlebars.SafeString(
+      `${schema.map((prop) => {
+        return prop.name + ": z." + prop.type + "()" + "\n";
+      })}`
+    );
   });
 
   plop.setGenerator("generate", {
