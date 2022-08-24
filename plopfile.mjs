@@ -13,8 +13,6 @@ export default function (plop) {
   plop.setHelper("fieldsToZod", function ({ hash }) {
     const { method, fields } = hash;
 
-    console.log({ method });
-
     const schema = fields.split(" ").map((field) => {
       const s = field.split(":");
 

@@ -30,7 +30,7 @@ export const appRouter = createRouter()
 ```
 
 
-2. Run `npx t3-generator` in your terminal
+2. Run `npx t3-generate` in your terminal
 
 3. When prompted, name your resource. For example, `post` or `product`.
 

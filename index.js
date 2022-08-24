@@ -11,8 +11,6 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-console.log(process.cwd());
-
 Plop.prepare(
   {
     cwd: process.cwd(),
