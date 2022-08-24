@@ -9,6 +9,7 @@
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
