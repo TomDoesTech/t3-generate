@@ -6,7 +6,7 @@
   "repository": "https://github.com/TomDoesTech/t3-generate",
   "scripts": {
     "start": "plop",
-    "release": "release-it"
+    "release": "release-it --npm.skipChecks"
   },
   "bin": "./index.js",
   "preferGlobal": true,
