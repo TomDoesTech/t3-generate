@@ -1,6 +1,6 @@
 {
   "name": "t3-generate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "type": "module",
   "repository": "https://github.com/TomDoesTech/t3-generate",
