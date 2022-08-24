@@ -9,12 +9,15 @@ export default function (plop) {
     return pluralize.singular(text);
   });
 
-  plop.setHelper("camel", function (text) {
-    return text
-      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word) {
-        return word.toUpperCase();
-      })
-      .replace(/\s+/g, "");
+  plop.setHelper("fieldsToZod", function (text) {
+    return text.split(" ").map((field) => {
+      const s = field.split(":");
+
+      return {
+        name: s[0],
+        value: s[1],
+      };
+    });
   });
 
   plop.setGenerator("generate", {
@@ -23,10 +26,18 @@ export default function (plop) {
       {
         type: "input",
         name: "name",
-        message: "Resource name please",
+        message: "What is the name of your resource?",
+      },
+      {
+        type: "input",
+        name: "fields",
+        message: "What fields will your resource have?",
       },
     ],
     actions: [
+      /*
+       * Creates pages for basic CRUD operations
+       */
       {
         type: "add",
         path: "{{rootPath}}/src/pages/{{ plural name}}/index.tsx",
@@ -50,6 +61,33 @@ export default function (plop) {
         path: "{{rootPath}}/src/pages/{{ plural name}}/[{{ singular name }}Id]/edit.tsx",
         templateFile: "plop-templates/pages/edit.hbs",
         data: { rootPath: process.cwd() },
+      },
+
+      /*
+       * Creates a router with basic CRUD operations
+       */
+      {
+        type: "add",
+        path: "{{rootPath}}/src/server/router/{{ lowerCase name }}.ts",
+        templateFile: "plop-templates/server/router.hbs",
+        data: { rootPath: process.cwd() },
+      },
+      /*
+       * Appends the router to the appRouter
+       */
+      {
+        type: "append",
+        path: "{{rootPath}}/src/server/router/index.ts",
+        template: `import { {{name}}Router } from "./{{ name }}";`,
+        data: { rootPath: process.cwd() },
+        pattern: "/* T3_SCAFFOLD_INJECT_IMPORT */",
+      },
+      {
+        type: "append",
+        path: "{{rootPath}}/src/server/router/index.ts",
+        template: `.merge("{{ plural name }}", {{ name }}Router)`,
+        data: { rootPath: process.cwd() },
+        pattern: "/* T3_SCAFFOLD_INJECT_MERGE */",
       },
     ],
   });

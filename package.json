@@ -1,15 +1,20 @@
 {
-  "name": "t3-scaffold",
-  "version": "0.1.17",
+  "name": "t3-generate",
+  "version": "0.0.1",
   "main": "index.js",
   "type": "module",
+  "repository": "https://github.com/TomDoesTech/t3-generate",
   "scripts": {
-    "start": "plop"
+    "start": "plop",
+    "release": "release-it"
   },
   "bin": "./index.js",
   "preferGlobal": true,
   "dependencies": {
     "plop": "^3.1.1",
     "pluralize": "^8.0.0"
+  },
+  "devDependencies": {
+    "release-it": "^15.4.0"
   }
 }

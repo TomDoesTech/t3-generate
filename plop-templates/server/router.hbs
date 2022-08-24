@@ -1,0 +1,84 @@
+import { createRouter } from "./context";
+import { z } from "zod";
+import { TRPCError } from "@trpc/server";
+
+export const {{ lowerCase name }}Router = createRouter()
+  .query("list-{{ plural (lowerCase name) }}", {
+    input: z.object({
+{{fieldsToZod fields }}
+    }),
+    async resolve({ ctx, input }) {
+
+    },
+  }).query("get-{{ lowerCase name }}", {
+    input: z.object({
+
+    }),
+    async resolve({ ctx, input }) {
+
+    },
+  })
+  .middleware(async ({ ctx, next }) => {
+    if (!ctx.session?.user) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+      });
+    }
+
+    return next();
+  })
+  .mutation("create-{{ lowerCase name }}", {
+    input: z.object({
+
+    }),
+    async resolve({ ctx, input }) {
+      const {  } = input;
+
+      const user = ctx.session?.user;
+
+      try {
+      
+      } catch (e) {
+    
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+        });
+      }
+    },
+  }).mutation("update-{{ lowerCase name }}", {
+    input: z.object({
+
+    }),
+    async resolve({ ctx, input }) {
+      const {  } = input;
+
+      const user = ctx.session?.user;
+
+      try {
+      
+      } catch (e) {
+    
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+        });
+      }
+    },
+  }).mutation("delete-{{ lowerCase name }}", {
+    input: z.object({
+
+    }),
+    async resolve({ ctx, input }) {
+      const {  } = input;
+
+      const user = ctx.session?.user;
+
+      try {
+      
+      } catch (e) {
+    
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+        });
+      }
+    },
+  })
